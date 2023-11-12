@@ -1,8 +1,11 @@
 <?php
 if (!empty($_SESSION['msgbox_info']) == 1) {
     echo '
-            <div class="box-notification-ok">
-                <p>' . $_SESSION['text_msgbox_info'] . '</p>
+            <div class="box-notification-ok alert alert-success alert-dismissible fade show" role="alert">
+                ' . $_SESSION['text_msgbox_info'] . '.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
         ';
 }
