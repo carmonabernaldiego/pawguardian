@@ -8,16 +8,15 @@ $date_time_end = date_create(date('Y-m-d'));
 $interval = date_diff($date_time_start, $date_time_end);
 $days = intval($interval->format('%a'));
 
-if ($days < 15 && $_SESSION['user_image'] != 'user.png') {
-    $disabledUploadImage = 'disabled';
-    
-    if ((15 - $days) >= 1) {
-        $_SESSION['msgbox_info'] = 1;
-        $_SESSION['msgbox_error'] = 0;
-        $_SESSION['text_msgbox_info'] = 'Imagen de usuario actualizada recientemente.';
-    }
-} else {
+if ($days >= 15 or $_SESSION['image_updated_at'] == null or $_SESSION['user_image'] == 'user.png') {
 	$disabledUploadImage = 'false';
+} else {
+	$disabledUploadImage = 'disabled';
+	if ((15 - $days) >= 1) {
+		$_SESSION['msgbox_info'] = 1;
+		$_SESSION['msgbox_error'] = 0;
+		$_SESSION['text_msgbox_info'] = 'Imagen de usuario actualizada recientemente.';
+	}
 }
 
 ?>
