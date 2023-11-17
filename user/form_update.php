@@ -154,7 +154,7 @@ if ($_SESSION['permissions'] == 'admin' || $_SESSION['permissions'] == 'editor')
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="selectuserlevelstudies" class="control-label">Nivel de estudios</label>
-                                <select id="selectuserlevelstudies" class="form-control name="selectlevelstudies" required>
+                                <select id="selectuserlevelstudies" class="form-control" name="selectlevelstudies" required>
                             ';
                             if ($_SESSION['administrative_level_studies'] == 'Licenciatura') {
                                 echo
