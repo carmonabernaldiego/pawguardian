@@ -40,14 +40,6 @@ if (strpos($url_actual, 'modules')) {
         </a>
       </li>
       <li class="nav-item nav-category">Navegación</li>
-      <li class="nav-item <?php if ($output[1] == 'school_periods') {
-                            echo 'active';
-                        } ?>">
-        <a href="/modules/school_periods" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
-          <span class="link-title">Ciclo Escolar</span>
-        </a>
-      </li>
       <li class="nav-item <?php if ($output[1] == 'users') {
                             echo 'active';
                         } ?>">
@@ -78,22 +70,6 @@ if (strpos($url_actual, 'modules')) {
         <a href="/modules/students" class="nav-link">
           <i class="link-icon" data-feather="users"></i>
           <span class=" link-title">Alumnos</span>
-        </a>
-      </li>
-      <li class="nav-item <?php if ($output[1] == 'subjects') {
-                            echo 'active';
-                        } ?>">
-        <a href="/modules/subjects" class="nav-link">
-          <i class="link-icon" data-feather="bookmark"></i>
-          <span class="link-title">Materias</span>
-        </a>
-      </li>
-      <li class="nav-item <?php if ($output[1] == 'groups') {
-                            echo 'active';
-                        } ?>">
-        <a href="/modules/groups" class="nav-link">
-          <i class="link-icon" data-feather="layers"></i>
-          <span class="link-title">Grupos</span>
         </a>
       </li>
     </ul>
