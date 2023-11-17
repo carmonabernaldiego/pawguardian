@@ -24,14 +24,6 @@ if (!empty($_POST['txtuser']) and !empty($_POST['txtpass'])) {
                     if ($row = mysqli_fetch_array($result)) {
                         $name = $row['name'];
                         $surnames = $row['surnames'];
-
-                        $sql = "SELECT school_period FROM school_periods WHERE active = 1 AND current = 1 LIMIT 1";
-
-                        if ($result = $conexion->query($sql)) {
-                            if ($row = mysqli_fetch_array($result)) {
-                                $school_period = $row['school_period'];
-                            }
-                        }
                     } else {
                         goto error_user;
                     }
@@ -54,14 +46,6 @@ if (!empty($_POST['txtuser']) and !empty($_POST['txtpass'])) {
                     if ($row = mysqli_fetch_array($result)) {
                         $name = $row['name'];
                         $surnames = $row['surnames'];
-
-                        $sql = "SELECT school_period FROM school_periods WHERE active = 1 AND current = 1 LIMIT 1";
-
-                        if ($result = $conexion->query($sql)) {
-                            if ($row = mysqli_fetch_array($result)) {
-                                $school_period = $row['school_period'];
-                            }
-                        }
                     } else {
                         goto error_user;
                     }
@@ -84,14 +68,6 @@ if (!empty($_POST['txtuser']) and !empty($_POST['txtpass'])) {
                     if ($row = mysqli_fetch_array($result)) {
                         $name = $row['name'];
                         $surnames = $row['surnames'];
-
-                        $sql = "SELECT school_period FROM school_periods WHERE active = 1 AND current = 1 LIMIT 1";
-
-                        if ($result = $conexion->query($sql)) {
-                            if ($row = mysqli_fetch_array($result)) {
-                                $school_period = $row['school_period'];
-                            }
-                        }
                     } else {
                         goto error_user;
                     }
@@ -114,14 +90,6 @@ if (!empty($_POST['txtuser']) and !empty($_POST['txtpass'])) {
                     if ($row = mysqli_fetch_array($result)) {
                         $name = $row['name'];
                         $surnames = $row['surnames'];
-
-                        $sql = "SELECT school_period FROM school_periods WHERE active = 1 AND current = 1 LIMIT 1";
-
-                        if ($result = $conexion->query($sql)) {
-                            if ($row = mysqli_fetch_array($result)) {
-                                $school_period = $row['school_period'];
-                            }
-                        }
                     } else {
                         goto error_user;
                     }
@@ -143,7 +111,6 @@ if (!empty($_POST['txtuser']) and !empty($_POST['txtpass'])) {
                 setcookie('email', $email, time() + 15 * 24 * 60 * 60);
                 setcookie('image', $image, time() + 15 * 24 * 60 * 60);
                 setcookie('permissions', $permissions, time() + 15 * 24 * 60 * 60);
-                setcookie('school_period', $school_period, time() + 15 * 24 * 60 * 60);
                 setcookie('authenticate', 'go-' . $user, time() + 15 * 24 * 60 * 60);
 
                 header('Location: home');
@@ -154,7 +121,6 @@ if (!empty($_POST['txtuser']) and !empty($_POST['txtpass'])) {
                 $_SESSION['email'] = $email;
                 $_SESSION['image'] = $image;
                 $_SESSION['permissions'] = $permissions;
-                $_SESSION['school_period'] = $school_period;
                 $_SESSION['authenticate'] = 'go-' . $user;
 
                 header('Location: /home');

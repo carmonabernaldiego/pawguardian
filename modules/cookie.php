@@ -12,7 +12,6 @@ if ($remember == 'si') {
 	$_SESSION['email'] = $_COOKIE['email'];
 	$_SESSION['image'] = $_COOKIE['image'];
 	$_SESSION['permissions'] = $_COOKIE['permissions'];
-	$_SESSION['school_period'] = $_COOKIE['school_period'];
 	$_SESSION['authenticate'] = $_COOKIE['authenticate'];
 
 	if (!empty($_COOKIE['section-admin'])) {
