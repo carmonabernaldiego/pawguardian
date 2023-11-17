@@ -5,21 +5,6 @@
   
 -------------------------------------------*/
 
-function confirmPass() {
-  pass1 = document.getElementById("pass1");
-  pass2 = document.getElementById("pass2");
-
-  if (pass1.value != pass2.value) {
-    document.getElementById("labelError").classList.add("show");
-
-    return false;
-  } else {
-    document.getElementById("labelError").classList.remove("show");
-
-    return true;
-  }
-}
-
 let image_crop = $(".image-crop").croppie({
   enableExif: true,
   viewport: {

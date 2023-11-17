@@ -28,6 +28,7 @@ if (isset($_POST["txtoldpassword"])) {
         exit();
     }
 } else {
-    header('Location: /');
+    Error('Error al actualizar contraseña.');
+    header('Location: /user');
     exit();
 }

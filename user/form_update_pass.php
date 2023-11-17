@@ -26,9 +26,6 @@ if ($days >= 15 or $_SESSION['image_updated_at'] == null or $_SESSION['user_imag
     <li class="breadcrumb-item active" aria-current="page">Cambiar contraseña</li>
   </ol>
 </nav>
-<?php
-include_once '../modules/notif_info.php';
-?>
 <div class="row">
   <?php
   include_once 'form_image.php';
@@ -50,8 +47,6 @@ include_once '../modules/notif_info.php';
           </div>
           <div class="form-group">
             <label for="txtconfirmnewpassword" id="labelHide">Confirmar nueva contraseña</label>
-            <label for="txtconfirmnewpassword" id="labelError" style="color: red; font-weight: bold;">Las
-              contraseñas no coinciden.</label>
             <input id="txtconfirmnewpassword" class="form-control" type="password" name="txtconfirmnewpassword" value=""
               maxlength="50" required />
           </div>
@@ -62,8 +57,4 @@ include_once '../modules/notif_info.php';
     </div>
   </div>
 </div>
-<?php
-include_once '../modules/notif_info.php';
-?>
-<script src="/js/modules/userUpdatePass.js" type="text/javascript"></script>
 <script src="/js/modules/user.js" type="text/javascript"></script>

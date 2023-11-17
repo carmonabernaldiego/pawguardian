@@ -41,12 +41,19 @@ if ($_SESSION['permissions'] == 'admin' || $_SESSION['permissions'] == 'editor')
     }
 }
 ?>
-<div class="form-data" style="width: 100%;">
-    <div class="loader-user"></div>
-    <div class="body">
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/user">Configuración</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Actualizar información personal</li>
+  </ol>
+</nav>
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
         <form name="form-update-user" action="update.php" method="POST" autocomplete="off" autocapitalize="on">
-            <div class="wrap">
-                <?php
+          <div class="row">
+            <?php
                 if ($_SESSION['permissions'] == 'admin' || $_SESSION['permissions'] == 'editor') {
                     echo '
                     <div class="first">
@@ -155,7 +162,17 @@ if ($_SESSION['permissions'] == 'admin' || $_SESSION['permissions'] == 'editor')
                         <input id="txtuserobservation" class="text" type="text" name="txtobservation" value="' . $_SESSION['administrative_observations'] . '" placeholder="Observación" maxlength="200" />
                     </div>
                     ';
-                } else if ($_SESSION['permissions'] == 'student') {
+                }
+            ?>
+          </div>
+          <button type="submit" class="btn btn-primary submit">Actualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php
+                if ($_SESSION['permissions'] == 'student') {
                     echo '
                     <div class="first">
                         <label for="txtuserid" class="label">Usuario</label>
@@ -250,13 +267,6 @@ if ($_SESSION['permissions'] == 'admin' || $_SESSION['permissions'] == 'editor')
 				</div>
                 ';
                 }
-                ?>
-            </div>
-            <button id="btnSave" class="btn icon" type="submit">save</button>
-        </form>
-    </div>
-</div>
-<?php
-include_once '../modules/notif_info.php';
-?>
+            ?>
+
 <script src="/js/modules/userUpdate.js" type="text/javascript"></script>
