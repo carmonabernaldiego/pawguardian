@@ -23325,11 +23325,11 @@ address p {
     #flotChart1 {
       height: 200px; } }
 
-#progressbar1 {
+#humidityChart {
   width: 200px;
   height: 200px;
   position: relative; }
-  #progressbar1 svg {
+  #humidityChart svg {
     height: 200px;
     width: 200px;
     fill: none;
