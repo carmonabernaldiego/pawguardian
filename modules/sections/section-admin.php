@@ -39,39 +39,6 @@ if (strpos($url_actual, 'modules')) {
           <span class="link-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item nav-category">Navegación</li>
-      <li class="nav-item <?php if ($output[1] == 'users') {
-                            echo 'active';
-                        } ?>">
-        <a href="/modules/users" class="nav-link">
-          <i class="link-icon" data-feather="users"></i>
-          <span class="link-title">Usuarios</span>
-        </a>
-      </li>
-      <li class="nav-item <?php if ($output[1] == 'administratives') {
-                            echo 'active';
-                        } ?>">
-        <a href="/modules/administratives" class="nav-link">
-          <i class="link-icon" data-feather="users"></i>
-          <span class="link-title">Administrativos</span>
-        </a>
-      </li>
-      <li class="nav-item <?php if ($output[1] == 'teachers') {
-                            echo 'active';
-                        } ?>">
-        <a href="/modules/teachers" class="nav-link">
-          <i class="link-icon" data-feather="users"></i>
-          <span class="link-title">Docentes</span>
-        </a>
-      </li>
-      <li class="nav-item <?php if ($output[1] == 'students') {
-                            echo 'active';
-                        } ?>">
-        <a href="/modules/students" class="nav-link">
-          <i class="link-icon" data-feather="users"></i>
-          <span class=" link-title">Alumnos</span>
-        </a>
-      </li>
     </ul>
   </div>
 </nav>
