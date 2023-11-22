@@ -37,10 +37,16 @@ var colors = {
   muted: "#686868",
 };
 
-// Función para formatear la fecha
+// Función para formatear la fecha y hora
 function formatDate(dateString) {
   const date = new Date(dateString);
-  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear().toString().slice(-2); // Obtiene los dos últimos dígitos del año
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
+  return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 
 // Referencia a los sensores en Firebase
@@ -86,7 +92,7 @@ if (document.getElementById("humidityChart")) {
 // Escucha cambios en los datos de temperatura
 onValue(temperatureRef, (snapshot) => {
   const data = snapshot.val();
-  const temperaturaData = [];
+  let temperaturaData = [];
   if (data) {
     Object.entries(data).forEach(([key, entry]) => {
       temperaturaData.push({
@@ -94,6 +100,12 @@ onValue(temperatureRef, (snapshot) => {
         temperatura: entry.Value,
       });
     });
+
+    // Asegúrate de que temperaturaData tenga solo los últimos 24 registros
+    if (temperaturaData.length > 24) {
+      temperaturaData = temperaturaData.slice(temperaturaData.length - 12);
+    }
+
     if (!myChart) {
       myChart = new Chart(temperatureChart, {
         type: "line",
