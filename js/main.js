@@ -21,8 +21,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const dbRef = ref(db, "TemperatureSensor");
-
 var gridLineColor = "rgba(77, 138, 240, .1)";
 
 var colors = {
@@ -52,6 +50,8 @@ function formatDate(dateString) {
 // Referencia a los sensores en Firebase
 const temperatureRef = ref(db, "TemperatureSensor");
 const humidityRef = ref(db, "HumiditySensor");
+const pirRef = ref(db, "PIRSensor");
+const gasRef = ref(db, "GasSensor");
 
 // Crear el gráfico de temperatura
 let myChart;
@@ -164,6 +164,54 @@ onValue(humidityRef, (snapshot) => {
     if (lastEntry) {
       const humidityValue = lastEntry[1].Value;
       humidityBar.animate(humidityValue / 100); // Asume que Value es un porcentaje
+    }
+  }
+});
+
+onValue(pirRef, (snapshot) => {
+  const data = snapshot.val();
+  if (data) {
+    const lastEntry = Object.entries(data).pop();
+    if (lastEntry) {
+      const pirValue = lastEntry[1].Value;
+
+      // Actualizar el mensaje si el valor es 1
+      if (pirValue === 1) {
+        document.getElementById("statusPIR").textContent =
+          "El perro se ha dormido.";
+
+        // Establecer un temporizador para eliminar el mensaje después de 30 segundos
+        setTimeout(() => {
+          document.getElementById("statusPIR").textContent = "";
+        }, 30000); // 30000 milisegundos equivalen a 30 segundos
+      } else {
+        // Si el valor no es 1, asegurarse de que no se muestre el mensaje
+        document.getElementById("statusPIR").textContent = "";
+      }
+    }
+  }
+});
+
+onValue(gasRef, (snapshot) => {
+  const data = snapshot.val();
+  if (data) {
+    const lastEntry = Object.entries(data).pop();
+    if (lastEntry) {
+      const gasValue = lastEntry[1].Status;
+
+      // Actualizar el mensaje si el valor es 1
+      if (gasValue == "1") {
+        document.getElementById("statusGas").textContent =
+          "¡Atención! Parece que tu amigo peludo ha hecho sus necesidades. Es hora de una limpieza.";
+
+        // Establecer un temporizador para eliminar el mensaje después de 1 minuto
+        setTimeout(() => {
+          document.getElementById("statusGas").textContent = "";
+        }, 60000); // 60000 milisegundos equivalen a 1 minuto
+      } else {
+        // Si el valor no es 1, asegurarse de que no se muestre el mensaje
+        document.getElementById("statusGas").textContent = "";
+      }
     }
   }
 });
