@@ -52,6 +52,7 @@ const temperatureRef = ref(db, "TemperatureSensor");
 const humidityRef = ref(db, "HumiditySensor");
 const pirRef = ref(db, "PIRSensor");
 const gasRef = ref(db, "GasSensor");
+const waterRef = ref(db, "WaterSensor");
 
 // Crear el gráfico de temperatura
 let myChart;
@@ -211,6 +212,30 @@ onValue(gasRef, (snapshot) => {
       } else {
         // Si el valor no es 1, asegurarse de que no se muestre el mensaje
         document.getElementById("statusGas").textContent = "";
+      }
+    }
+  }
+});
+
+onValue(waterRef, (snapshot) => {
+  const data = snapshot.val();
+  if (data) {
+    const lastEntry = Object.entries(data).pop();
+    if (lastEntry) {
+      const waterValue = lastEntry[1].Status;
+
+      // Actualizar el mensaje si el valor es 1
+      if (waterValue == "1") {
+        document.getElementById("statusGas").textContent =
+          "¡Recordatorio importante! Tu perrito ya no tiene agua. Es momento de rellenar su recipiente con agua fresca.";
+
+        // Establecer un temporizador para eliminar el mensaje después de 1 minuto
+        setTimeout(() => {
+          document.getElementById("statusWater").textContent = "";
+        }, 30000); // 30000 milisegundos equivalen a 30 segundos
+      } else {
+        // Si el valor no es 1, asegurarse de que no se muestre el mensaje
+        document.getElementById("statusWater").textContent = "";
       }
     }
   }

@@ -83,6 +83,12 @@ include_once 'modules/notif_info_unset.php';
           </div>
         </div>
 
+        <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+          <div>
+            <h4 id="statusWater" class="mb-3 mb-md-0"></h4>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-lg-7 col-xl-8 grid-margin stretch-card">
             <div class="card">
