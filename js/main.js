@@ -167,3 +167,155 @@ onValue(humidityRef, (snapshot) => {
     }
   }
 });
+
+// Función para generar un rango de fechas
+function getDates(startDate, endDate) {
+  const dates = [];
+  let currentDate = new Date(startDate);
+  while (currentDate <= endDate) {
+    dates.push(new Date(currentDate));
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+  return dates;
+}
+
+// Función para formatear la fecha
+function formatDatepH(date) {
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear().toString().slice(-2); // Obtiene los dos últimos dígitos del año
+  return `${day}/${month}/${year}`;
+}
+
+// Función para clasificar el nivel de pH
+function clasificarPh(ph) {
+  if (ph < 5.0) return "Bajo";
+  if (ph > 6.5) return "Alto";
+  return "Normal";
+}
+
+// Generar datos de pH
+const startDate = new Date("2023-10-23");
+const endDate = new Date("2023-11-21");
+const phData = getDates(startDate, endDate).map((date) => {
+  const phValue = (Math.random() * (8.5 - 6) + 6).toFixed(1);
+  return {
+    fecha: formatDatepH(date),
+    ph: phValue,
+    clasificacion: clasificarPh(phValue),
+  };
+});
+
+// Configurar la gráfica
+const ctx = document.getElementById("phChart").getContext("2d");
+const phChart = new Chart(ctx, {
+  type: "line",
+  data: {
+    labels: phData.map((d) => d.fecha),
+    datasets: [
+      {
+        label: "Nivel de pH",
+        data: phData.map((d) => d.ph),
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: false,
+            suggestedMin: 5, // Mínimo sugerido para pH
+            suggestedMax: 9, // Máximo sugerido para pH
+          },
+        },
+      ],
+    },
+  },
+});
+
+// Agregar los datos a la tabla cuando el contenido del DOM esté cargado
+document.addEventListener("DOMContentLoaded", function () {
+  const table = document.getElementById("phTable");
+  phData.forEach((data) => {
+    const row = table.insertRow();
+    const cellDate = row.insertCell();
+    const cellPh = row.insertCell();
+    const cellClasificacion = row.insertCell();
+    cellDate.textContent = data.fecha;
+    cellPh.textContent = data.ph;
+    cellClasificacion.textContent = data.clasificacion;
+  });
+
+  // Calcular y mostrar estadísticas
+  const media = calcularMedia(phData);
+  const moda = calcularModa(phData);
+  const mediana = calcularMediana(phData);
+  const varianza = calcularVarianza(phData, media);
+  const desviacionEstandar = calcularDesviacionEstandar(varianza);
+
+  const statsDiv = document.getElementById("phStats");
+  statsDiv.innerHTML = `
+    <h4>Media: ${media}</h4>
+    <h4>Moda: ${moda.join(", ")}</h4>
+    <h4>Mediana: ${mediana}</h4>
+    <h4>Varianza: ${varianza}</h4>
+    <h4>Desviación Estándar: ${desviacionEstandar}</h4>
+  `;
+});
+
+// Función para calcular la media
+function calcularMedia(data) {
+  const sum = data.reduce((acc, val) => acc + parseFloat(val.ph), 0);
+  return (sum / data.length).toFixed(2);
+}
+
+// Función para calcular la moda
+function calcularModa(data) {
+  const frequency = {};
+  let maxFreq = 0;
+  let modes = [];
+
+  data.forEach((item) => {
+    if (frequency[item.ph]) {
+      frequency[item.ph]++;
+    } else {
+      frequency[item.ph] = 1;
+    }
+
+    if (frequency[item.ph] > maxFreq) {
+      maxFreq = frequency[item.ph];
+      modes = [item.ph];
+    } else if (frequency[item.ph] === maxFreq) {
+      modes.push(item.ph);
+    }
+  });
+
+  return modes;
+}
+
+// Función para calcular la mediana
+function calcularMediana(data) {
+  const phValues = data
+    .map((item) => parseFloat(item.ph))
+    .sort((a, b) => a - b);
+  const mid = Math.floor(phValues.length / 2);
+
+  return phValues.length % 2 !== 0
+    ? phValues[mid]
+    : ((phValues[mid - 1] + phValues[mid]) / 2).toFixed(2);
+}
+
+// Función para calcular la varianza
+function calcularVarianza(data, media) {
+  const sum = data.reduce((acc, val) => acc + Math.pow(val.ph - media, 2), 0);
+  return (sum / data.length).toFixed(2);
+}
+
+// Función para calcular la desviación estándar
+function calcularDesviacionEstandar(varianza) {
+  return Math.sqrt(varianza).toFixed(2);
+}

@@ -99,6 +99,51 @@ include_once 'modules/notif_info_unset.php';
         </div>
         <!-- row -->
 
+        <div class="row">
+          <div class="col-lg-12 col-xl-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-baseline mb-4">
+                  <h6 class="card-title mb-0">Tabla pH</h6>
+                </div>
+                <br />
+
+                <div class="table-responsive">
+                  <table class="table table-hover" id="phTable">
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Valor de pH</th>
+                      <th>Clasificación</th>
+                    </tr>
+                    <!-- Las filas de datos se insertarán aquí usando JavaScript -->
+                  </table>
+                </div>
+
+                <br />
+                <br />
+                <div id="phStats"></div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+
+        <div class="row">
+          <div class="col-lg-12 col-xl-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-baseline mb-4">
+                  <h6 class="card-title mb-0">pH</h6>
+                </div>
+                <br />
+                <canvas id="phChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+
       </div>
 
       <!-- partial:partials/_footer.html -->
@@ -127,7 +172,7 @@ include_once 'modules/notif_info_unset.php';
   <script src="../assets/js/template.js"></script>
   <!-- endinject -->
   <!-- custom js for this page -->
-  <script src="/js/firebase.js" type="module"></script>
+  <script src="/js/main.js" type="module"></script>
   <script src="../assets/js/dashboard.js"></script>
   <script src="../assets/js/datepicker.js"></script>
   <!-- end custom js for this page -->
